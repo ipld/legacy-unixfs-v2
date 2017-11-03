@@ -82,7 +82,9 @@ Possible entries:
     For other types they may be defined if they have a meaningful value. 
   * The `fsize` field is omitted for files that are leaves (i.e. `raw`) as it is the same value as `size`.
 
-* IPLD filenames must at minimum be valid UTF-8 strings and may not contain the null (0x00) or '/' characters.
+* IPLD filenames must valid UTF-8 strings which the following additional constraints:
+  (1) cannot contain the null (0x00) or `/` characters
+  (2) cannot be the strings: `.` or `..`
   Other restricts may be put in place.
   If the original filename does not meet these requirements then an implementation MAY transform the file from
   the original, so it is valid IPLD file, and store the original file in the `fname` field.
