@@ -31,3 +31,19 @@ The value of the map is another CBOR map with the following standard fields:
   - `size`: Integer. Cumulative size of all directories and files in `data`.
 
 The `type` field set to `dir`.
+
+## IPLD `symlink`
+
+A symlink object conceptually stores a path to another file.
+
+Symlink content is really just a string, and could be any string, but it is
+normally expected to be a file.  It may be a relative or absolute path; and
+there is no guarantee that it is a clean or normalized path.  There is no
+guarantee that the path that a symlink points to will exist.
+
+A symlink object has the following fields:
+
+  - `type`: String with the value of `'sym'`.
+  - `target`: A string which is the target path of the symlink.
+
+The `type` field must be set to `sym`.
