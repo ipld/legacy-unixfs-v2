@@ -23,15 +23,15 @@ The `type` field must be set to `file`.
 
 File data is an Array. Each element is an Array with only 2 elements (Tuple).
 
-  - 0: Array. Tuple containing two integers, the `start` and `end` offsets of the content.
+  - 0: Array. Tuple containing two integers, the `start` and `length` offsets of the content.
     - 0: Integer: start offset.
-    - 1: Integer: end offset.
+    - 1: Integer: length of part(s).
   - 1: Link. Either a `raw` link or a link to another node formatted as `file-data`.
 
 ```javascript
 [
   [ [0, 1024], Link ],
-  [ [1025, 1089], Link ]
+  [ [1025, 1002], Link ]
 ]
 ```
 
