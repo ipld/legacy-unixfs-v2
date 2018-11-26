@@ -47,7 +47,7 @@ The key of the map is a filename and is a CBOR text string encoded in UTF-8.
 The value of the map is another CBOR map with the following standard fields:
 
   - `type`: String with value of `'dir'`.
-  - `data`: TODO: Define structure for directory content data.
+  - `data`: [WIP](https://github.com/ipfs/unixfs-v2/pull/19)
   - `size`: Integer. Cumulative size of all directories and files in `data`.
 
 The `type` field set to `dir`.
