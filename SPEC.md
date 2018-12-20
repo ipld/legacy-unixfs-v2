@@ -47,7 +47,15 @@ The key of the map is a filename and is a CBOR text string encoded in UTF-8.
 The value of the map is another CBOR map with the following standard fields:
 
   - `type`: String with value of `'dir'`.
-  - `data`: [WIP](https://github.com/ipfs/unixfs-v2/pull/19)
+  - `data`: Object or Link. 
+    - `data` as Object: values must be links to `file` or `dir` nodes.
+    - `data` as Link: Link must resolve to a `hamt` root node.
   - `size`: Integer. Cumulative size of all directories and files in `data`.
 
 The `type` field set to `dir`.
+
+The `data` field can be either an Object or a Link. When representing a directory structure with an object
+the keys are the directory names and the values must be links to either `file` or `dir` nodes. When 
+the keyspace is too large for a single node `data` should be a link to `hamt` node.
+
+`hamt` has not yet been specified but will follow the implementation [here](https://github.com/ipfs/go-hamt-ipld).
