@@ -50,9 +50,9 @@ A directory object represents a directory and has the following paths.
 
   - `type`: String with value of `'dir'`.
   - `data`: 
-    - Object with keys as file/directory names that are string encoded in UTF-8.
+    - Object (or `hamt`) with keys as file/directory names that are string encoded in UTF-8.
     - Values must be `file` or `dir` nodes.
-    - Link *may* resolve to a `hamt` root node.
+    - 
   - `size`: Integer. Cumulative size of all directories and files in `data`.
 
 The `type` path must be set to `dir`.
