@@ -12,50 +12,25 @@ could be many Blocks connected by CID Links.
 A top level IPLD object has at least two paths: `type` and `data`
 and maybe a few other such as a version string or a set of flags.
 
-The `type` path's value is either `file` or `dir`.
+UnixFSv2 uses a still experimental system for
+[composite types](https://github.com/ipld/specs/pull/126). When `Bytes` 
+and `Map` are used in this specification they refer not only to IPLD 
+Data Model "kinds" but to any IPLD data structure that supports the
+right operations.
 
 ## IPLD `file`
 
 A file object has the following paths.
 
-  - `type`: String with value of `'file'`.
-  - `data`: Array of `file-data`.
+  - `type`: String with value of `'IPFS/Experimental/File/0'`. *Note: this string will change when the specification is ratified*.
+  - `data`: `Bytes`.
   - `size`: Integer. Cumulative size of `data`.
-
-The `type` path must be set to `file`.
-
-### `file-data`
-
-File data is an Array. Each element is an Array with only 2 elements (Tuple).
-
-  - 0: Array. Tuple containing two integers, the `start` and `length` offsets of the content.
-    - 0: Integer: start offset.
-    - 1: Integer: length of part(s).
-  - 1: Binary or `file-data`. Value can be either the binary data or additional nested `file-data` structures.
-
-```javascript
-[
-  [ [0, 1024], Link ],
-  [ [1025, 1002], Link ]
-]
-```
-
-Implementations are encouraged to use nested `file-data` array nodes through links for files
-with many chunks in order to limit the size of the serialized node. No strict boundary is
-set but it is typical to try and limit node size to less than one megabyte.
 
 ## IPLD `dir`
 
 A directory object represents a directory and has the following paths.
 
-  - `type`: String with value of `'dir'`.
-  - `data`: 
-    - Object (or `hamt`) with keys as file/directory names that are string encoded in UTF-8.
-    - Values must be `file` or `dir` nodes.
-    - 
+  - `type`: String with value of `'IPFS/Experimental/Dir/0'`. *Note: this string will change when the specification is ratified*. 
+  - `data`: `Map`.
   - `size`: Integer. Cumulative size of all directories and files in `data`.
 
-The `type` path must be set to `dir`.
-
-When the keyspace is too large for a single node `data` should be a link to `hamt` node. `hamt` has 
-not yet been specified but will follow the implementation [here](https://github.com/ipfs/go-hamt-ipld).
